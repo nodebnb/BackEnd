@@ -2,7 +2,7 @@
   "name": "BackEnd",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node -- --stage 1 --optional strict -- index.js"
+    "start": "export NODE_ENV=development; nodemon --exec babel-node -- --stage 1 --optional strict -- index.js"
   },
   "dependencies": {
     "body-parser": "^1.12.3",

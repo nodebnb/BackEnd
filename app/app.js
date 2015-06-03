@@ -2,7 +2,6 @@ let express = require('express')
 let morgan = require('morgan')
 let cookieParser = require('cookie-parser')
 let bodyParser = require('body-parser')
-let mongoose = require('mongoose')
 let routes = require('./routes')
 
 require('songbird')
