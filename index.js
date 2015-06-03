@@ -5,6 +5,9 @@ let mongoose = require('mongoose')
 let exec = require('child_process').exec
 
 // start mongodb server
+async() => {exec('mongod')}()
+  .then(() => console.log('MongoDB started'))
+
 const NODE_ENV = process.env.NODE_ENV
 mongoose.connect(config.database[NODE_ENV].url)
 
@@ -19,4 +22,3 @@ let app = new App(config)
 app.initialize(port)
   .then(()=> console.log(`Listening @ http://127.0.0.1:${port}`))
   .catch(e => console.log(e.stack ? e.stack : e))
-
