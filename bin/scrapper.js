@@ -48,6 +48,7 @@ function initPhantom(req, res, count) {
                                 listing: []
                             }
                             $('.listing').each(function() {
+                                console.log($(this).data('price').match(/sup>([\d.]+)<sup/)[1])
                                 let listOne = {
                                     bnbId: $(this).data('id'),
                                     lat: $(this).data('lat'),
@@ -88,4 +89,6 @@ http.createServer((req, res) => {
 }).listen(8080)
 
 mongoose.connect('mongodb://127.0.0.1:27017/nodebnb')
+
+spawn('open', 'http://localhost:3000')
 
