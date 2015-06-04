@@ -51,4 +51,6 @@ kill <node-process>
 ```
 2. Nothing returned when hitting `http://localhost:8000`
 
+Restart elasticsearch & mongodb and redo step 6 & 7
+
 
