@@ -9,7 +9,7 @@ let client = new elasticsearch.Client({
 module.exports = (app) => {
 
   const index = 'listings'
-  const type = 'ca'
+  const type = 'listing'
 
   app.get('/', (req, res) => {
     client.search({}).then(body => {
@@ -18,17 +18,78 @@ module.exports = (app) => {
   })
 
   app.get('/listings', (req, res) => {
-    let q = req.query.q
-    let sort = req.sort
+    let query = req.query
+    let q = query.q
+    let maxPrice = query.maxPrice
+    let lat = query.lat
+    let lon = query.lon
+    let distance = query.distance || '1km'
+    let sort = 'price'
+    let body
 
-    if(!sort) {
-        client.search({
-            index: index,
-            q: q
-        }).then(body => {
-          res.json(body.hits.hits)
-        })
-    } 
+
+    // Return all
+    if(!q) {
+      body = {
+        "query": {
+          "match_all": {}
+        }
+      }
+    
+    // Refined query
+    } else {
+      body = {
+        "query": {
+          "filtered": {
+            "query": {
+              "query_string": {
+                  "query": q,
+                  "lenient": true,
+                  "fields" : [
+                    "name^5",
+                    "price^10",
+                    "_all"
+                  ],
+                  "phrase_slop": 2
+              }
+            }
+          }
+        },
+        "sort": [
+          {"price": "asc"}, 
+          "_score"
+        ],
+        "min_score": 0.2
+      }
+
+      if(maxPrice) {
+        body.query.filtered.filter = {
+           "range": {
+              "price": {
+                "lte": maxPrice
+              }
+          }
+        }
+      }
+
+      if(lat & lon) {
+        body.query.filtered.filter.geo_distance = {
+          distance: distance,
+          Location: {
+            lat: lat,
+            lon: lon
+          }
+        }
+      }
+    }
+
+    client.search({
+      "index": index,
+      "type": type,
+      "body": body
+    }).then(body => {
+      res.json(body.hits.hits)
+    })
   })
 
 }
