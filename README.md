@@ -23,25 +23,14 @@ $ echo 'alias bodemon="nodemon --exec babel-node -- --stage 1 --optional strict 
 ## First time setup
 
 1. Clone the repo: `git clone https://github.com/nodebnb/BackEnd.git`
-2. Go into folder: `cd BackEnd`
+2.  Go into folder: `cd BackEnd`
 3. Install dependencies: `npm install`
 4. Create local MongoDB database called **nodebnb**
-5. Create ElasticSearch index 
-```bash
-$ curl -XPUT 'http://localhost:9200/listings/'
-```
-6. Load data into MongoDB
-```bash
-# Load history data
-$ mongoimport --db nodebnb --collection listings --file data/bnb.json
-# Or crawl new data
-$ bodemon bin/scraper.js
-```
-
-7. Index data into search engine
-```bash
-$ bodemon bin/indexer.js
-```
+5. Create ElasticSearch index `curl -XPUT 'http://localhost:9200/listings/'`
+6. Load history data into MongoDB  `mongoimport --db nodebnb --collection listings --file data/bnb.json`
+    
+   Or crawl new data `bodemon bin/scraper.js`
+7. Index data into search engine `bodemon bin/indexer.js`
 
 ## Start
 
@@ -60,6 +49,6 @@ Error: listen EADDRINUSE
 ps aux | grep node
 kill <node-process>
 ```
-1.Nothing returned when hitting `http://localhost:8000`
+2. Nothing returned when hitting `http://localhost:8000`
 
 
