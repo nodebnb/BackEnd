@@ -24,7 +24,7 @@ export elasticsearch bin folder, e.g.
 ## Start
 
 1. Start the app: `npm start`
-2. View in browser at: `http://localhost:3000`
+2. View in browser at: `http://localhost:8000`
 
 ## Demo
 
