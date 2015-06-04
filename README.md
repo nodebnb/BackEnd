@@ -6,18 +6,19 @@ Web services for nodebnb
 
 - [node](http://nodejs.org/)
 - [mongodb](https://www.elastic.co/downloads/elasticsearch)
-- [elasticsearch]((https://www.elastic.co/downloads/elasticsearch))
+- [elasticsearch](https://www.elastic.co/downloads/elasticsearch)
 
 export elasticsearch bin folder, e.g.
 
-    ```bash
-    $ echo 'export PATH=/Users/ytian/Applications/elasticsearch-1.5.2/bin:$PATH' >> ~/.bash_profile; source ~/.bash_profile
-    ```
+```bash
+$ echo 'export PATH=/Users/ytian/Applications/elasticsearch-1.5.2/bin:$PATH' >> ~/.bash_profile; source ~/.bash_profile
+```
 
 export convenient way to run ES6 Babel on Node.js
-	```bash
-    $ echo 'alias bodemon="nodemon --exec babel-node -- --stage 1 --optional strict --"' >> ~/.bash_profile
-    ```
+
+```bash
+$ echo 'alias bodemon="nodemon --exec babel-node -- --stage 1 --optional strict --"' >> ~/.bash_profile
+```
 
 ## First time setup
 
@@ -26,21 +27,21 @@ export convenient way to run ES6 Babel on Node.js
 3. Install dependencies: `npm install`
 4. Create local MongoDB database called **nodebnb**
 5. Create ElasticSearch index 
-	```bash
-    $ curl -XPUT 'http://localhost:9200/listings/'
-    ```
-6. Load hisory data into MongoDB
-	```bash
-    $ mongoimport --db nodebnb --collection listings --file data/bnb.json
-    ```
-   Or crawl new data into MongoDB
-   ```bash
-    $ bodemon bin/scraper.js
-    ```
+```bash
+$ curl -XPUT 'http://localhost:9200/listings/'
+```
+6. Load data into MongoDB
+```bash
+# Load history data
+$ mongoimport --db nodebnb --collection listings --file data/bnb.json
+# Or crawl new data
+$ bodemon bin/scraper.js
+```
+
 7. Index data into search engine
-	```bash
-    $ bodemon bin/indexer.js
-    ```
+```bash
+$ bodemon bin/indexer.js
+```
 
 ## Start
 
@@ -55,8 +56,10 @@ export convenient way to run ES6 Babel on Node.js
 
 Error: listen EADDRINUSE
 
-	``` 
-	ps aux | grep node
-	kill <node-process>
-	```
+``` 
+ps aux | grep node
+kill <node-process>
+```
+1.Nothing returned when hitting `http://localhost:8000`
+
 
