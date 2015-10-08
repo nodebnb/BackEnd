@@ -17,7 +17,7 @@ module.exports = (app) => {
     })
   })
 
-  app.get('/listings', (req, res) => {
+  app.get('/search', (req, res) => {
     let query = req.query
     let q = query.q
     let maxPrice = query.maxPrice

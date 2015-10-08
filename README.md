@@ -53,4 +53,8 @@ kill <node-process>
 
 Restart elasticsearch & mongodb and redo step 6 & 7
 
+## Screenshot
+![Search page](data/Nodebnb.png)
+
+
 
